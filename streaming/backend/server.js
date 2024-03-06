@@ -120,3 +120,15 @@ app.get('/api/peliculas/', async (req, res) => {
         console.log(error);
     }
 })
+
+//Ruta obtener una pelicula por id
+app.get("/api/pelicula/:id", async (req, res) => {
+    let idPelicula = req.params.id;
+    try{
+        const pelicula = await Pelicula.findById({_id: idPelicula});
+        res.json(pelicula)
+    }
+    catch(error){
+        console.log(error);
+    }
+})
