@@ -60,7 +60,7 @@ const serieSchema = new mongoose.Schema({
 
 })
 
-const Serie = mongoose.model('Serie', userSchema);
+const Serie = mongoose.model('Serie', serieSchema);
 module.exports = Serie;
 
 
@@ -76,7 +76,7 @@ const peliculaSchema = new mongoose.Schema({
 
 })
 
-const Pelicula = mongoose.model('Pelicula', userSchema);
+const Pelicula = mongoose.model('Pelicula', peliculaSchema);
 module.exports = Pelicula;
 
 
