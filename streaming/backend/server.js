@@ -13,8 +13,10 @@ app.listen(PORT, () => {
 
 })
 
+/* app.use(express.json); */
 app.use(bodyParser.json());     //usamos esto para analizar el cuerpo y pasarlo a JSON 
 app.use(cors());    //permite solicitudes de recursos
+
 
 
 //CONEXIÓN A MONGO ATLAS
@@ -131,17 +133,34 @@ app.get("/api/pelicula/:id", async (req, res) => {
     }
 })
 
-//Ruta insertar un comentario
-app.get("/api/pelicula/:id/comentario", async (req, res) => {
-    let idPelicula = req.params.id;
-    let comentario = req.params.comentario;
+
+//-----------------------post 
+//Ruta para crear USUARIO
+app.post('/api/usuario', (req, res) => {
     try{
-        const pelicula = await Pelicula.update({ _id: ObjectId(idPelicula)},
-        { $push: {comentarios: comentario}
-        });
-        res.json(pelicula)
+        const usuario = Usuario(req.body);
+        usuario.save().then((data) => res.json(data))
+
     }
     catch(error){
         console.log(error);
     }
-})
+    });
+
+
+
+
+/*
+//Ruta para crear PELICULA
+app.post('/api/pelicula', (req, res) => {
+    try{
+        const usuario = Pelicula(req.body);
+        usuario.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
+*/
+
