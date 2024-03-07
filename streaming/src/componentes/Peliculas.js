@@ -1,5 +1,6 @@
 import React from"react";
 import '../css/peliculas.css';
+import {Link} from "react-router-dom";
 
 function Peliculas (){
 
@@ -16,29 +17,38 @@ function Peliculas (){
 
     console.log(peliculas);
 
-
-    let peliculasElementos = peliculas.map(function(pelicula) {
+    let peliculasElementos = peliculas.map((pelicula) => {
         let sum = 0;
         for (let i = 0; i < pelicula.estrellas_usuarios.length; i++) {
              sum = sum + pelicula.estrellas_usuarios[i].calificacion;
             
         }
-        let avg = 0;
-        avg = sum / pelicula.estrellas_usuarios.length;
 
-        console.log(avg);
+        let avg = 0;
+        avg = sum / pelicula.estrellas_usuarios.length;   
         return( 
             <div className="peliculas-info">
-                <img src={`data:image/gif;base64,`+ peliculas.portada} alt="" />
+                <img src={peliculas.portada} alt="" />
                 <div className="peliculas-texto">
                     <p>{pelicula.titulo} {pelicula.anio}</p>
                     <p>{avg} ★</p>
-                    <button className="pelicula-icono"><img className="pelicula-icono" src={require(`../imagenes/iconoPlay.png`)} title="Ver"/></button>
-                    <button className="pelicula-icono"><img className="pelicula-icono" src={require(`../imagenes/iconoCalificar.png`)} Title="información"/></button>
+                    <Link>
+                    <img 
+                        className="pelicula-icono" 
+                        src={require(`../imagenes/iconoPlay.png`)} 
+                        title="Ver"/>
+                    </Link>
+                    <Link to={"/PeliculaInfo/" + pelicula._id}>
+                    <img 
+                        className="pelicula-icono" 
+                        src={require(`../imagenes/iconoCalificar.png`)} 
+                        Title="información"/>
+                    </Link>
                 </div>
             </div>
-        )
-    });
+        );
+    });    
+    
 
     return(
         <div className="peliculas-contenedor">
