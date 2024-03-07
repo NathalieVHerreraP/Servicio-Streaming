@@ -53,7 +53,7 @@ const serieSchema = new mongoose.Schema({
     genero: Array,
     anio: Number,
     rottenTomatoes: Number,
-    fecha_estreno: Number,
+    fecha_estreno: Date,
     reparto: Array,
     sinopsis: String,
     disponible_en_netflix: Boolean,
@@ -165,6 +165,17 @@ app.post('/api/pelicula', (req, res) => {
     try{
         const usuario = Pelicula(req.body);
         usuario.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
+//Ruta para crear SERIE
+app.post('/api/serie', (req, res) => {
+    try{
+        const serie = Serie(req.body);
+        serie.save().then((data) => res.json(data))
     }
     catch(error){
         console.log(error);
