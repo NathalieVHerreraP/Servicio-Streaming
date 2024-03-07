@@ -87,8 +87,6 @@ module.exports = Pelicula;
 
 
 
-
-
 //APIS
 //Ruta para obtener todos los USUARIOS
 app.get('/api/usuarios/', async (req, res) => {
@@ -140,23 +138,20 @@ app.get("/api/pelicula/:id", async (req, res) => {
 })
 
 
-
-
-
-
-
-
 //-----------------------post 
 //Ruta para crear USUARIO
 app.post('/api/usuario', (req, res) => {
     try{
         const usuario = Usuario(req.body);
         usuario.save().then((data) => res.json(data))
+
     }
     catch(error){
         console.log(error);
     }
-});
+    });
+
+
 
 
 
