@@ -87,8 +87,6 @@ module.exports = Pelicula;
 
 
 
-
-
 //APIS
 //Ruta para obtener todos los USUARIOS
 app.get('/api/usuarios/', async (req, res) => {
@@ -139,11 +137,23 @@ app.get("/api/pelicula/:id", async (req, res) => {
     }
 })
 
-
-
-
-
-
+//Ruta insertar un comentario
+app.put("/api/comentario/:id", async (req, res) => {
+    let idPelicula = req.params.id;
+    let coment = req.body;
+    console.log("Comentario: "+coment);
+    try{
+        await Pelicula.updateOne({ _id: idPelicula},
+            { $push: {comentarios: {
+                usuario: coment.usuario, 
+                contenido: coment.contenido, 
+                fecha: new Date()
+            }}}
+        )  
+    }catch(error){
+        console.log(error);
+    };
+});
 
 
 //-----------------------post 
@@ -152,11 +162,14 @@ app.post('/api/usuario', (req, res) => {
     try{
         const usuario = Usuario(req.body);
         usuario.save().then((data) => res.json(data))
+
     }
     catch(error){
         console.log(error);
     }
-});
+    });
+
+
 
 
 
@@ -171,6 +184,7 @@ app.post('/api/pelicula', (req, res) => {
     }
 });
 
+
 //Ruta para crear SERIE
 app.post('/api/serie', (req, res) => {
     try{
@@ -181,3 +195,4 @@ app.post('/api/serie', (req, res) => {
         console.log(error);
     }
 });
+
