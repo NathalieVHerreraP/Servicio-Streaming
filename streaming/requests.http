@@ -1,0 +1,16 @@
+###
+POST http://localhost:3000/api/usuario HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre_usuario": "Mario",
+    "correo": "plomeria@bross.com",
+    "constrasena": "peaches",
+    "peliculas_vistas": ["Monsters Inc"],
+    "foto": "https://caketopper.click/wp-content/uploads/2023/08/MARIO-BROSS.png",
+    "listas": 
+    [
+        {"nombre": "Por ver", "peliculas": ["Las aventuras de Ladybug: La película"] },
+        {"nombre": "Favoritas", "peliculas": ["A dos metros de ti"]}
+	]
+}

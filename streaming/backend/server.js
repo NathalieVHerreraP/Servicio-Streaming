@@ -13,8 +13,10 @@ app.listen(PORT, () => {
 
 })
 
+/* app.use(express.json); */
 app.use(bodyParser.json());     //usamos esto para analizar el cuerpo y pasarlo a JSON 
 app.use(cors());    //permite solicitudes de recursos
+
 
 
 //CONEXIÓN A MONGO ATLAS
@@ -132,3 +134,22 @@ app.get("/api/pelicula/:id", async (req, res) => {
         console.log(error);
     }
 })
+
+
+
+
+
+
+
+
+//-----------------------post 
+//Ruta para crear USUARIO
+app.post('/api/usuario', (req, res) => {
+    try{
+        const usuario = Usuario(req.body);
+        usuario.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
