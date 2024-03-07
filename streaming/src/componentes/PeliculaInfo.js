@@ -21,12 +21,14 @@ function PeliculaInfo(){
         event.preventDefault();
         let comentarioJson = {
             usuario: "usuario2", 
-            contenido: coment, 
-            fecha: new Date()
+            contenido: "", 
         }
 
         React.useEffect(() => {
-            
+            fetch(`/api/comentario/${params.id}/${comentarioJson}`).
+            catch(error => {
+                console.error(error);
+            })
         });
     }
 

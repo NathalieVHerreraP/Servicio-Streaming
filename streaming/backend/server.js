@@ -133,6 +133,24 @@ app.get("/api/pelicula/:id", async (req, res) => {
     }
 })
 
+//Ruta insertar un comentario
+app.put("/api/comentario/:id", async (req, res) => {
+    let idPelicula = req.params.id;
+    let coment = req.body;
+    console.log("Comentario: "+coment);
+    try{
+        await Pelicula.updateOne({ _id: idPelicula},
+            { $push: {comentarios: {
+                usuario: coment.usuario, 
+                contenido: coment.contenido, 
+                fecha: new Date()
+            }}}
+        )  
+    }catch(error){
+        console.log(error);
+    };
+});
+
 
 //-----------------------post 
 //Ruta para crear USUARIO
