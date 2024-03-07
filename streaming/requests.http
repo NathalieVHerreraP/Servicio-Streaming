@@ -17,13 +17,22 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/api/usuario HTTP/1.1
+POST http://localhost:3000/api/pelicula HTTP/1.1
 Content-Type: application/json
 
 {
     "titulo": "La bella y la Bestia",
-    "genero" ["Live Action", "Romance", "Fantasia"],
+    "genero": ["Live Action", "Romance", "Fantasia"],
     "anio": 2017,
     "calificacionRT": 7.1,
-    
+    "comentarios": 
+        [
+		    {"usuario": "maximusFierro", "contenido": "Cantan mucho :(", "fecha": "2024-03-05T13:34:00.000"}
+	    ],
+	"estrellas_usuarios": 
+		[
+		    {"usuario": "maximusFierro", "calificacion": 42}
+	    ],
+    "portada": "https://static.wikia.nocookie.net/doblaje/images/2/2d/La_Bella_y_La_Bestia_Poster.jpg/revision/latest?cb=20200727234958&path-prefix=es"
+
 }

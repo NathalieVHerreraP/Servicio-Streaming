@@ -72,7 +72,11 @@ const peliculaSchema = new mongoose.Schema({
     genero: Array,
     anio: Number,
     calificacionRT: Number,
-    comentarios: Array,
+    comentarios: [{
+        usuario: String,
+        contenido:String ,
+        fecha: Date
+    }],
     estrellas_usuarios: Array,
     portada: String
 
@@ -155,7 +159,7 @@ app.post('/api/usuario', (req, res) => {
 });
 
 
-/*
+
 //Ruta para crear PELICULA
 app.post('/api/pelicula', (req, res) => {
     try{
@@ -166,5 +170,3 @@ app.post('/api/pelicula', (req, res) => {
         console.log(error);
     }
 });
-
-*/
