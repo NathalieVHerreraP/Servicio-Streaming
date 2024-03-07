@@ -153,3 +153,18 @@ app.post('/api/usuario', (req, res) => {
         console.log(error);
     }
 });
+
+
+/*
+//Ruta para crear PELICULA
+app.post('/api/pelicula', (req, res) => {
+    try{
+        const usuario = Pelicula(req.body);
+        usuario.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
+*/
