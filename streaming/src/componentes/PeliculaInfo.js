@@ -6,6 +6,7 @@ import "../css/peliculaInfo.css";
 function PeliculaInfo(){
     const params = useParams();
     const [pelicula,setPelicula] = React.useState(null);
+    const [coment, setComent] = React.useState("");
 
     React.useEffect(() => {
         fetch(`/api/pelicula/${params.id}`)
@@ -15,6 +16,19 @@ function PeliculaInfo(){
             console.error(error);
           });
     }, []);
+
+    function insertComent(event){
+        event.preventDefault();
+        let comentarioJson = {
+            usuario: "usuario2", 
+            contenido: coment, 
+            fecha: new Date()
+        }
+
+        React.useEffect(() => {
+            
+        });
+    }
 
     console.log(pelicula);
 
@@ -38,6 +52,22 @@ function PeliculaInfo(){
             </div>
         );
     });
+
+    let comentarioNuevo = (
+        <div>
+            <form>
+                <label onSubmit={insertComent()}>
+                    Comnetario:
+                    <input 
+                        type="text" 
+                        value= {coment}
+                        onChange ={(e) => setComent(e.target.value)}
+                    />
+                </label>
+                <input type="submit" value="Publicar" />
+            </form>
+        </div>
+    );
 
     return (
         <div>
