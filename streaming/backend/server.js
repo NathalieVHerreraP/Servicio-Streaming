@@ -81,8 +81,6 @@ module.exports = Pelicula;
 
 
 
-
-
 //APIS
 //Ruta para obtener todos los USUARIOS
 app.get('/api/usuarios/', async (req, res) => {
