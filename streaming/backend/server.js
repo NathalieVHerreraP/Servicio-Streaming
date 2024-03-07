@@ -60,7 +60,7 @@ const serieSchema = new mongoose.Schema({
 
 })
 
-const Serie = mongoose.model('Serie', userSchema);
+const Serie = mongoose.model('Serie', serieSchema);
 module.exports = Serie;
 
 
@@ -76,7 +76,7 @@ const peliculaSchema = new mongoose.Schema({
 
 })
 
-const Pelicula = mongoose.model('Pelicula', userSchema);
+const Pelicula = mongoose.model('Pelicula', peliculaSchema);
 module.exports = Pelicula;
 
 
@@ -115,6 +115,18 @@ app.get('/api/peliculas/', async (req, res) => {
     try{
         const peliculas = await Pelicula.find({});
         res.json(peliculas)
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
+//Ruta obtener una pelicula por id
+app.get("/api/pelicula/:id", async (req, res) => {
+    let idPelicula = req.params.id;
+    try{
+        const pelicula = await Pelicula.findById({_id: idPelicula});
+        res.json(pelicula)
     }
     catch(error){
         console.log(error);
