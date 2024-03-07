@@ -132,3 +132,18 @@ app.get("/api/pelicula/:id", async (req, res) => {
         console.log(error);
     }
 })
+
+//Ruta insertar un comentario
+app.get("/api/pelicula/:id/comentario", async (req, res) => {
+    let idPelicula = req.params.id;
+    let comentario = req.params.comentario;
+    try{
+        const pelicula = await Pelicula.update({ _id: ObjectId(idPelicula)},
+        { $push: {comentarios: comentario}
+        });
+        res.json(pelicula)
+    }
+    catch(error){
+        console.log(error);
+    }
+})
