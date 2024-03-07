@@ -13,8 +13,10 @@ app.listen(PORT, () => {
 
 })
 
+/* app.use(express.json); */
 app.use(bodyParser.json());     //usamos esto para analizar el cuerpo y pasarlo a JSON 
 app.use(cors());    //permite solicitudes de recursos
+
 
 
 //CONEXIÓN A MONGO ATLAS
@@ -60,7 +62,7 @@ const serieSchema = new mongoose.Schema({
 
 })
 
-const Serie = mongoose.model('Serie', userSchema);
+const Serie = mongoose.model('Serie', serieSchema);
 module.exports = Serie;
 
 
@@ -76,7 +78,7 @@ const peliculaSchema = new mongoose.Schema({
 
 })
 
-const Pelicula = mongoose.model('Pelicula', userSchema);
+const Pelicula = mongoose.model('Pelicula', peliculaSchema);
 module.exports = Pelicula;
 
 
@@ -120,3 +122,49 @@ app.get('/api/peliculas/', async (req, res) => {
         console.log(error);
     }
 })
+
+//Ruta obtener una pelicula por id
+app.get("/api/pelicula/:id", async (req, res) => {
+    let idPelicula = req.params.id;
+    try{
+        const pelicula = await Pelicula.findById({_id: idPelicula});
+        res.json(pelicula)
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
+
+
+
+
+
+
+
+//-----------------------post 
+//Ruta para crear USUARIO
+app.post('/api/usuario', (req, res) => {
+    try{
+        const usuario = Usuario(req.body);
+        usuario.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
+
+/*
+//Ruta para crear PELICULA
+app.post('/api/pelicula', (req, res) => {
+    try{
+        const usuario = Pelicula(req.body);
+        usuario.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
+*/
