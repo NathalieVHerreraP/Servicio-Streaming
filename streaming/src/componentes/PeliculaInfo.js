@@ -17,12 +17,14 @@ function PeliculaInfo(){
           });
     }, []);
 
-    function insertComent(event){
-        event.preventDefault();
+    function InsertComent(event){
         let comentarioJson = {
-            usuario: "usuario2", 
-            contenido: "", 
+            usuario: "PruebaFrontend", 
+            contenido: coment, 
+            fecha: new Date()
         }
+
+        console.log(comentarioJson);
 
         React.useEffect(() => {
             fetch(`/api/comentario/${params.id}/${comentarioJson}`).
@@ -50,7 +52,7 @@ function PeliculaInfo(){
         return(
             <div>
                 <p>{comentario.usuario} </p>
-                <p>{comentario.comentario}</p>
+                <p>{comentario.contenido}</p>
             </div>
         );
     });
@@ -58,7 +60,7 @@ function PeliculaInfo(){
     let comentarioNuevo = (
         <div>
             <form>
-                <label onSubmit={insertComent()}>
+                <label onSubmit={InsertComent()}>
                     Comnetario:
                     <input 
                         type="text" 
@@ -75,6 +77,7 @@ function PeliculaInfo(){
         <div>
             {peliculaInfo}
             {comentariosLista}
+            {comentarioNuevo}
         </div>
     );
 }

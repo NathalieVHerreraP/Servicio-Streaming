@@ -134,18 +134,19 @@ app.get("/api/pelicula/:id", async (req, res) => {
 })
 
 //Ruta insertar un comentario
-app.put("/api/comentario/:id", async (req, res) => {
+app.put("/api/comentario/:id/body", async (req, res) => {
     let idPelicula = req.params.id;
     let coment = req.body;
-    console.log("Comentario: "+coment);
+    console.log("ID: "+ idPelicula +"Comentario: "+ coment);
     try{
-        await Pelicula.updateOne({ _id: idPelicula},
+        let doc = await Pelicula.findByIdAndUpdate( idPelicula,
             { $push: {comentarios: {
                 usuario: coment.usuario, 
                 contenido: coment.contenido, 
                 fecha: new Date()
             }}}
         )  
+        console.log(doc);
     }catch(error){
         console.log(error);
     };
