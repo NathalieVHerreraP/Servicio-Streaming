@@ -53,7 +53,7 @@ const serieSchema = new mongoose.Schema({
     genero: Array,
     anio: Number,
     rottenTomatoes: Number,
-    fecha_estreno: Number,
+    fecha_estreno: Date,
     reparto: Array,
     sinopsis: String,
     disponible_en_netflix: Boolean,
@@ -72,7 +72,11 @@ const peliculaSchema = new mongoose.Schema({
     genero: Array,
     anio: Number,
     calificacionRT: Number,
-    comentarios: Array,
+    comentarios: [{
+        usuario: String,
+        contenido:String ,
+        fecha: Date
+    }],
     estrellas_usuarios: Array,
     portada: String
 
@@ -169,7 +173,7 @@ app.post('/api/usuario', (req, res) => {
 
 
 
-/*
+
 //Ruta para crear PELICULA
 app.post('/api/pelicula', (req, res) => {
     try{
@@ -181,5 +185,15 @@ app.post('/api/pelicula', (req, res) => {
     }
 });
 
-*/
+
+//Ruta para crear SERIE
+app.post('/api/serie', (req, res) => {
+    try{
+        const serie = Serie(req.body);
+        serie.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
 
