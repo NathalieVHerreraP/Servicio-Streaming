@@ -1,5 +1,6 @@
 import React from "react";
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
+import { useEffect } from "react";
 import "../css/peliculaInfo.css";
 
 
@@ -7,77 +8,73 @@ function PeliculaInfo(){
     const params = useParams();
     const [pelicula,setPelicula] = React.useState(null);
     const [coment, setComent] = React.useState("");
+    
 
-    React.useEffect(() => {
+    useEffect( () => {
         fetch(`/api/pelicula/${params.id}`)
-        .then((res) => res.json())
-        .then((pelicula) => setPelicula(pelicula))
-        .catch(error => {
-            console.error(error);
-          });
+            .then((res) => res.json())
+            .then((pelicula) => setPelicula(pelicula))
+            .catch(error => {
+                console.error(error);
+            });
     }, []);
 
-    function InsertComent(event){
-        let comentarioJson = {
-            usuario: "PruebaFrontend", 
-            contenido: coment, 
-            fecha: new Date()
-        }
 
-        console.log(comentarioJson);
-
-        React.useEffect(() => {
-            fetch(`/api/comentario/${params.id}/${comentarioJson}`).
-            catch(error => {
-                console.error(error);
-            })
-        });
-    }
 
     console.log(pelicula);
 
     let peliculaInfo = (
-        <div className="pelicula-info">
+        <div className="pelicula-info" >
                 <h2>{pelicula.titulo} {pelicula.anio}</h2>
                 <img 
-                    src={pelicula.poster} 
+                    class="pelicula-img"
+                    src={pelicula.portada} 
                     title={`Poster de la pelicula ${pelicula.titulo}`}
                 />
                 <p>Generos: {pelicula.genero.join(", ")}</p>
                 <p>Calificación rotten tomatoes: {pelicula.calificacionRT}</p>
-            </div>
+        </div>
     );
 
-    let comentariosLista = pelicula.comentarios.map((comentario) => {
-        return(
-            <div>
-                <p>{comentario.usuario} </p>
-                <p>{comentario.contenido}</p>
-            </div>
-        );
-    });
-
     let comentarioNuevo = (
-        <div>
-            <form>
-                <label onSubmit={InsertComent()}>
-                    Comnetario:
+        <div class="comentar">
+            <label>
+                Comnetario:
+                <p>
                     <input 
                         type="text" 
                         value= {coment}
                         onChange ={(e) => setComent(e.target.value)}
                     />
-                </label>
-                <input type="submit" value="Publicar" />
-            </form>
+                </p>
+            </label>
+            <Link to={"/InsertComentario/"+pelicula._id+"/"+coment} class="boton publicar">
+                    <p>Publicar</p>
+            </Link>
         </div>
     );
 
+    let comentariosLista = pelicula.comentarios.map((comentario) => {
+        return(
+            <div className="comentario-comentar" >
+                <div className="comentario" key={comentario._id}> 
+                    <div > 
+                        <p>{comentario.usuario} </p>
+                        <p>{comentario.contenido}</p>
+                    </div>
+                    <Link to={"/EliminarComentario/"+pelicula._id+"/"+comentario._id} class="boton borrar">
+                        <p>Eliminar Comentario</p>
+                    </Link>
+                </div>
+                {comentarioNuevo}
+            </div>
+        );
+    });
+
     return (
-        <div>
+        <div className="contenedor">
             {peliculaInfo}
             {comentariosLista}
-            {comentarioNuevo}
         </div>
     );
 }
