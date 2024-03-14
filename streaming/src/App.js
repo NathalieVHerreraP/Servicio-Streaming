@@ -4,6 +4,7 @@ import Peliculas from './componentes/Peliculas.js';
 import PeliculaInfo from './componentes/PeliculaInfo.js';
 import {Routes, Route} from "react-router-dom";
 import Navbar from "./componentes/Navbar.js";
+import Home from "./componentes/Home.js";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           {/* <Route path="/Series" element={<Series/>}/>
           <Route path="/" element={<Carrusel/>}/> */}
           <Route path="/PeliculaInfo/:id" element={<PeliculaInfo/>}/>
+          <Route path="/Home" element={<Home/>}/>
           <Route path=""/>
         </Routes>
       </header>
