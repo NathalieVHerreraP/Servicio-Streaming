@@ -1,6 +1,5 @@
 import React from  "react";
 import '../css/home.css';
-// import rana from '../imagenes/rana.jpeg'
 
 function Home (){
     
