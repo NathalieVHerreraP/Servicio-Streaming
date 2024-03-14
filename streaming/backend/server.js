@@ -137,6 +137,47 @@ app.get("/api/pelicula/:id", async (req, res) => {
     }
 })
 
+//Ruta insertar un comentario
+app.get("/api/agregarComentario/:id/:usuario/:coment", async (req, res) => {
+    let idPelicula = req.params.id;
+    let coment = {
+        usuario: req.params.usuario,
+        contenido: req.params.coment
+    };
+    console.log("ID: "+ idPelicula +"Comentario: "+ coment);
+    try{
+        let doc = await Pelicula.findByIdAndUpdate( idPelicula,
+            { $push: {comentarios: {
+                usuario: coment.usuario,  
+                contenido: coment.contenido, 
+                fecha: new Date()
+            }}}
+        ) 
+        console.log(doc); 
+        res.json({respuesta:"se añadió el comentario"});
+    }catch(error){
+        console.log(error);
+    };
+});
+
+//Ruta eliminar un comentario
+app.get("/api/eliminarComentario/:id/:usuarioID", async (req, res) => {
+    let idPelicula = req.params.id;
+    let usuarioID = req.params.usuarioID;
+    console.log("ID: "+ idPelicula +"Comentario: "+ usuarioID);
+    try{
+        let doc = await Pelicula.findByIdAndUpdate( idPelicula,
+            { $pull: {comentarios: {
+                _id: usuarioID
+            }}}
+        )  
+        console.log(doc);
+        res.json({respuesta:"se eliminó el comentario"});
+    }catch(error){
+        console.log(error);
+    };
+});
+
 
 //-----------------------post 
 //Ruta para crear USUARIO
@@ -150,9 +191,6 @@ app.post('/api/usuario', (req, res) => {
         console.log(error);
     }
     });
-
-
-
 
 
 //Ruta para crear PELICULA
@@ -176,6 +214,7 @@ app.post('/api/serie', (req, res) => {
         console.log(error);
     }
 });
+
 
 
 //NO FUNCIONA
