@@ -3,6 +3,12 @@ img.pelicula-icono{
     width: 50px;
 }
 
+img.portada{
+    width: 70%;
+    border-radius: 5%;
+    margin-top: 15px;
+}
+
 button.pelicula-icono{
     background-color: transparent;
     border: none;
@@ -11,7 +17,17 @@ button.pelicula-icono{
 .peliculas-info{
     background-color: #08ac90;
     border-radius: 5%;
-    height: 300px;
+    height: auto;
     width: 200px;
+    margin: 20px;
+    align-items: center;
+}
+
+.peliculas-contenedor{
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 

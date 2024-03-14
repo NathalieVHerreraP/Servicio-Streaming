@@ -2,11 +2,12 @@ import React from"react";
 import '../css/peliculas.css';
 import {Link} from "react-router-dom";
 
+
 function Peliculas (){
 
     const [peliculas,setPeliculas] = React.useState(null);
 
-    React.useEffect(() => {
+    React.useEffect(() => { 
         fetch("/api/peliculas/")
         .then((res) => res.json())
         .then((peliculas) => setPeliculas(peliculas))
@@ -28,7 +29,7 @@ function Peliculas (){
         avg = sum / pelicula.estrellas_usuarios.length;   
         return( 
             <div className="peliculas-info">
-                <img src={peliculas.portada} alt="" />
+                <img src={pelicula.portada}  title={`Poster de la pelicula ${pelicula.titulo}`} class="portada" />
                 <div className="peliculas-texto">
                     <p>{pelicula.titulo} {pelicula.anio}</p>
                     <p>{avg} ★</p>
@@ -42,7 +43,7 @@ function Peliculas (){
                     <img 
                         className="pelicula-icono" 
                         src={require(`../imagenes/iconoCalificar.png`)} 
-                        Title="información"/>
+                        title="información"/>
                     </Link>
                 </div>
             </div>
