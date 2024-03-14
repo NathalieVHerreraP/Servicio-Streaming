@@ -1,7 +1,8 @@
 import React from  "react";
-import '../css/home.css';
+import '../css/series.css';
+// import rana from '../imagenes/rana.jpeg'
 
-function Home (){
+function Series (){
     
     const [series, setSeries] = React.useState(null);
 
@@ -21,11 +22,9 @@ function Home (){
     return(
         <div className="seriesInfo">
             
-            <h1> BIENVENIDOS </h1>
-            <h2> Aquí encontrars series y peliculas de tu agrado </h2>
-            <p> Entra en nuetro menú y diviertete mucho </p>
+            <h1>Series de La Rana Mafiosa</h1>
 
-            <div className="Portadas">
+            <div className="card">
                 <ul>
                     {series?.map((series) => (
                         <>
@@ -36,6 +35,17 @@ function Home (){
                          
                         </div>
                         
+                        <div className="contenido">
+                            <h2 key={series._id}>{series.titulo}, {series.anio} </h2>
+                            <p>{series.sinopsis}</p> <strong>GENEROS:</strong> {series.genero} 
+                            <p>Fecha de estreno: {series.fecha_estreno}</p>
+                            <p>REPARTO</p>
+                            <ul><li>{series.reparto}</li></ul>
+                            <p>CALIFICACIÓN EN RT: {series.rottenTomatoes}</p>
+                            <h5>Temporadas:</h5>
+                            {/* <p>{series.temporadas}</p> */}
+                            
+                        </div>
 
                         </div>
                         
@@ -54,5 +64,4 @@ function Home (){
 
 
 
-export default Home;
-
+export default Series;

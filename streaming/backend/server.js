@@ -53,7 +53,7 @@ const serieSchema = new mongoose.Schema({
     genero: Array,
     anio: Number,
     rottenTomatoes: Number,
-    fecha_estreno: Number,
+    fecha_estreno: Date,
     reparto: Array,
     sinopsis: String,
     disponible_en_netflix: Boolean,
@@ -72,7 +72,11 @@ const peliculaSchema = new mongoose.Schema({
     genero: Array,
     anio: Number,
     calificacionRT: Number,
-    comentarios: Array,
+    comentarios: [{
+        usuario: String,
+        contenido:String ,
+        fecha: Date
+    }],
     estrellas_usuarios: Array,
     portada: String
 
@@ -80,8 +84,6 @@ const peliculaSchema = new mongoose.Schema({
 
 const Pelicula = mongoose.model('Pelicula', peliculaSchema);
 module.exports = Pelicula;
-
-
 
 
 
@@ -135,11 +137,46 @@ app.get("/api/pelicula/:id", async (req, res) => {
     }
 })
 
+//Ruta insertar un comentario
+app.get("/api/agregarComentario/:id/:usuario/:coment", async (req, res) => {
+    let idPelicula = req.params.id;
+    let coment = {
+        usuario: req.params.usuario,
+        contenido: req.params.coment
+    };
+    console.log("ID: "+ idPelicula +"Comentario: "+ coment);
+    try{
+        let doc = await Pelicula.findByIdAndUpdate( idPelicula,
+            { $push: {comentarios: {
+                usuario: coment.usuario,  
+                contenido: coment.contenido, 
+                fecha: new Date()
+            }}}
+        ) 
+        console.log(doc); 
+        res.json({respuesta:"se añadió el comentario"});
+    }catch(error){
+        console.log(error);
+    };
+});
 
-
-
-
-
+//Ruta eliminar un comentario
+app.get("/api/eliminarComentario/:id/:usuarioID", async (req, res) => {
+    let idPelicula = req.params.id;
+    let usuarioID = req.params.usuarioID;
+    console.log("ID: "+ idPelicula +"Comentario: "+ usuarioID);
+    try{
+        let doc = await Pelicula.findByIdAndUpdate( idPelicula,
+            { $pull: {comentarios: {
+                _id: usuarioID
+            }}}
+        )  
+        console.log(doc);
+        res.json({respuesta:"se eliminó el comentario"});
+    }catch(error){
+        console.log(error);
+    };
+});
 
 
 //-----------------------post 
@@ -148,14 +185,14 @@ app.post('/api/usuario', (req, res) => {
     try{
         const usuario = Usuario(req.body);
         usuario.save().then((data) => res.json(data))
+
     }
     catch(error){
         console.log(error);
     }
-});
+    });
 
 
-/*
 //Ruta para crear PELICULA
 app.post('/api/pelicula', (req, res) => {
     try{
@@ -167,4 +204,29 @@ app.post('/api/pelicula', (req, res) => {
     }
 });
 
-*/
+//Ruta para crear SERIE
+app.post('/api/serie', (req, res) => {
+    try{
+        const serie = Serie(req.body);
+        serie.save().then((data) => res.json(data))
+    }
+    catch(error){
+        console.log(error);
+    }
+});
+
+
+
+//NO FUNCIONA
+//Ruta para Eliminar SERIE
+app.delete('/api/serie/:id', async (req, res) => {
+    const id =  req.params.id;
+    try{
+    const serieelim = await Serie.deleteOne({_id: id});
+    res.json(serieelim);
+
+    }
+    catch(error){
+        console.log(error);
+    }
+});
