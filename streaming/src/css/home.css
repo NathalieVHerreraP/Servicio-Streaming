@@ -1,0 +1,30 @@
+img.pelicula-icono{
+    height: 50px;
+    width: 50px;
+}
+
+img.portada{
+    width: 70%;
+    border-radius: 5%;
+    margin-top: 15px;
+}
+
+.portadaSerie img{
+    max-width: 240px;
+    max-height: 500px;
+    
+}
+
+.portadaSerie{
+    float: left;
+    margin: 15px;
+}
+
+.contenido{
+    width: 60%;
+}
+
+.serie{
+    margin-left: 30%;
+    margin-right: auto;
+}
