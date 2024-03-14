@@ -17,13 +17,66 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/api/usuario HTTP/1.1
+POST http://localhost:3000/api/pelicula HTTP/1.1
 Content-Type: application/json
 
 {
     "titulo": "La bella y la Bestia",
-    "genero" ["Live Action", "Romance", "Fantasia"],
+    "genero": ["Live Action", "Romance", "Fantasia"],
     "anio": 2017,
     "calificacionRT": 7.1,
-    
+    "comentarios": 
+        [
+		    {"usuario": "maximusFierro", "contenido": "Cantan mucho :(", "fecha": "2024-03-05T13:34:00.000"}
+	    ],
+	"estrellas_usuarios": 
+		[
+		    {"usuario": "maximusFierro", "calificacion": 42}
+	    ],
+    "portada": "https://static.wikia.nocookie.net/doblaje/images/2/2d/La_Bella_y_La_Bestia_Poster.jpg/revision/latest?cb=20200727234958&path-prefix=es"
+
 }
+
+
+###
+POST http://localhost:3000/api/serie HTTP/1.1
+Content-Type: application/json
+
+{
+    "titulo": "Dark",
+    "genero": ["Ciencia Ficción", "Suspenso", "Tragedia"],
+    "anio": 2017,
+    "calificacionRT": 9.5,
+    "fecha_estreno": "2017-12-01",
+    "reparto": ["Jonas Kahnwald", "Mikkel Nielsen", "Hannah Kahnwald"],
+    "sinopsis": "En la ciudad de Winden comienzan a desaparecer niños,15​ sacando a la luz las relaciones fracturadas, vidas dobles y el pasado oscuro de cuatro familias que viven allí, y revelando un misterio que abarca cuatro generaciones. ",
+    "disponible_en_netflix": true,
+    "portada": "https://pics.filmaffinity.com/Dark_Serie_de_TV-111203947-large.jpg",
+    "temporadas": 
+    {
+        "total": 3,
+        "detalles": 
+        [
+            {
+                "numero": 1,
+                "episodios": 10
+            },
+            {
+                "numero": 2,
+                "episodios": 8
+            },
+            {
+                "numero": 3,
+                "episodios": 8
+            }
+        ]
+    }
+
+}
+
+
+###
+GET http://localhost:3000/api/series/ HTTP/1.1
+
+###
+DELETE  http://localhost:3000/api/serie/65ce1fa19132419f88858227 HTTP/1.1

@@ -1,0 +1,18 @@
+.navegador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navegador ul li {
+    text-decoration: none;
+    color: black;
+    background-color: aqua;
+
+}
+
+.navegador ul li link{
+    text-decoration: none;
+    color: black;
+}
