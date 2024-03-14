@@ -4,8 +4,12 @@ import Peliculas from './componentes/Peliculas.js';
 import PeliculaInfo from './componentes/PeliculaInfo.js';
 import {Routes, Route} from "react-router-dom";
 import Navbar from "./componentes/Navbar.js";
+
 import InsertComentario from './componentes/InsertComentario.js';
 import EliminarComentario from './componentes/EliminarComentario.js';
+
+import Home from "./componentes/Home.js";
+
 
 function App() {
   return (
@@ -19,6 +23,7 @@ function App() {
           <Route path="/PeliculaInfo/:id" element={<PeliculaInfo/>}/>
           <Route path="/InsertComentario/:id/:coment" element={<InsertComentario/>}/>
           <Route path="/EliminarComentario/:id/:usuarioID" element={<EliminarComentario/>}/>
+          <Route path="/Home" element={<Home/>}/>
           <Route path=""/>
         </Routes>
       </header>
