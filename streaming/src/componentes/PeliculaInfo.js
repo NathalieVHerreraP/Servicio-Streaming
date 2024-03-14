@@ -20,7 +20,6 @@ function PeliculaInfo(){
     }, []);
 
 
-
     console.log(pelicula);
 
     let peliculaInfo = (

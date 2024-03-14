@@ -1,0 +1,22 @@
+.portadaSerie img{
+    max-width: 240px;
+    max-height: 500px;
+    
+}
+
+.portadaSerie{
+    float: left;
+    margin: 15px;
+}
+
+.contenido{
+    width: 60%;
+}
+
+.serie{
+    margin-left: 30%;
+    margin-right: auto;
+}
+
+p{
+}
