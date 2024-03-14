@@ -1,12 +1,15 @@
 import React from "react";
 import {Link, Outlet} from "react-router-dom";
+import '../css/nav.css'
 
 function Navbar(){
     return(
         <div>
-            <nav>
+            {/* <img src={logo} alt="logo rana"></img> */}
+            <nav className="navegador">
                 <ul>
-                <li>
+                    
+                    <li>
                         <Link to="/">Inicio</Link>                        
                     </li>
                     <li>

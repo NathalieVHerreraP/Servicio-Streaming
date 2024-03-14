@@ -25,9 +25,9 @@ function PeliculaInfo(){
             fecha: new Date()
         }
 
-        React.useEffect(() => {
+        // React.useEffect(() => {
             
-        });
+        // });
     }
 
     console.log(pelicula);

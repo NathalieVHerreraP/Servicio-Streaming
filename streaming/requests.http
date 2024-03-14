@@ -73,3 +73,10 @@ Content-Type: application/json
     }
 
 }
+
+
+###
+GET http://localhost:3000/api/series/ HTTP/1.1
+
+###
+DELETE  http://localhost:3000/api/serie/65ce1fa19132419f88858227 HTTP/1.1

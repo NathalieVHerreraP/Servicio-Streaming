@@ -176,3 +176,18 @@ app.post('/api/serie', (req, res) => {
         console.log(error);
     }
 });
+
+
+//NO FUNCIONA
+//Ruta para Eliminar SERIE
+app.delete('/api/serie/:id', async (req, res) => {
+    const id =  req.params.id;
+    try{
+    const serieelim = await Serie.deleteOne({_id: id});
+    res.json(serieelim);
+
+    }
+    catch(error){
+        console.log(error);
+    }
+});
