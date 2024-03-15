@@ -38,12 +38,15 @@ function Series (){
                         <div className="contenido">
                             <h2 key={series._id}>{series.titulo}, {series.anio} </h2>
                             <p>{series.sinopsis}</p> <strong>GENEROS:</strong> {series.genero} 
-                            <p>Fecha de estreno: {series.fecha_estreno}</p>
-                            <p>REPARTO</p>
-                            <ul><li>{series.reparto}</li></ul>
-                            <p>CALIFICACIÓN EN RT: {series.rottenTomatoes}</p>
-                            <h5>Temporadas:</h5>
-                            {/* <p>{series.temporadas}</p> */}
+                            <p><b>Fecha de estreno:</b> {series.fecha_estreno}</p>
+                            <p><b>Reparto:</b></p>
+                            <p>{series.reparto} </p>
+                            <p><b>Calificación de Rotten Tomatoes:</b> {series.rottenTomatoes}</p>
+                            <br></br>
+                            {/* <p>{series.temporadas.detalles}</p>
+                            <b>Detalles de temporadas:</b>
+                            <p>{series.temporadas.detalles}</p> */}
+                            
                             
                         </div>
 
