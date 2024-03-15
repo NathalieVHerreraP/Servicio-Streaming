@@ -1,6 +1,7 @@
 import React from  "react";
 import '../css/home.css';
 
+
 function Home (){
     
     const [series, setSeries] = React.useState(null);
@@ -25,7 +26,9 @@ function Home (){
             <h2> Aquí encontrars series y peliculas de tu agrado </h2>
             <p> Entra en nuetro menú y diviertete mucho </p>
 
-            <div className="Portadas">
+            <Series/>
+            <Peliculas/>
+
                 <ul>
                     {series?.map((series) => (
                         <>
@@ -47,7 +50,6 @@ function Home (){
                     
                 </ul>
             </div>
-        </div>
     );
 }
 
