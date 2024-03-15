@@ -6,7 +6,7 @@ function Navbar(){
     return(
         <div>
             {/* <img src={logo} alt="logo rana"></img> */}
-            <nav className="navegador">
+            <nav className="navegador" id="navbar">
                 <ul>
                     
                     <li>

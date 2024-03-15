@@ -1,6 +1,7 @@
 .portadaSerie img{
     max-width: 240px;
-    max-height: 500px;
+    max-height: 300px;
+    border-radius: 30px;
     
 }
 
@@ -11,12 +12,15 @@
 
 .contenido{
     width: 60%;
+    background-color: #08ac90;
+    border-radius: 30px;
 }
+
+
 
 .serie{
     margin-left: 30%;
     margin-right: auto;
+    
 }
 
-p{
-}
