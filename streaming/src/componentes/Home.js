@@ -1,60 +1,16 @@
-import React from  "react";
-import '../css/home.css';
-
+import React from "react"
+import {useLocation, useNavigate} from 'react-router-dom';
 
 function Home (){
-    
-    const [series, setSeries] = React.useState(null);
+    const location=useLocation()
 
-    React.useEffect(() => {
-        fetch("/api/series/")
-        .then((res) => res.json())
-        .then((series) => setSeries(series))
-        .catch(error => {
-            console.error(error);
-          });
-    }, []);
+    return (
+        <div className="homepage">
 
-    console.log(series);
+            <h1>Hola {location.state.id} y bienvenido a la casa</h1>
 
-    
-
-    return(
-        <div className="seriesInfo">
-            
-            <h1> BIENVENIDOS </h1>
-            <h2> Aquí encontrars series y peliculas de tu agrado </h2>
-            <p> Entra en nuetro menú y diviertete mucho </p>
-
-            <Series/>
-            <Peliculas/>
-
-                <ul>
-                    {series?.map((series) => (
-                        <>
-                        <div className="serie">
-
-                        <div className="portadaSerie">
-                           <img src={series.portada} alt="portada"  />
-                         
-                        </div>
-                        
-
-                        </div>
-                        
-                        
-                         <br></br>
-                         </>
-                    ))}
-                    
-                    
-                </ul>
-            </div>
-    );
+        </div>
+    )
 }
 
-
-
-
-export default Home;
-
+export default Home
