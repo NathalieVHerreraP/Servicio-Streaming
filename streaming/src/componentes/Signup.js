@@ -1,65 +1,48 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { useNavigate, Link } from "react-router-dom"
+import '../css/style.css'; // Importa el archivo CSS
 
 
-function Login() {
+function Signup() {
+
     const history=useNavigate();
 
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
+    const [email,setEmail]=useState('');
+    const [password,setPassword]=useState('');
 
-    async function submit(e){
-        e.preventDefault();
+    // async function Submit(e){
+    //     e.preventDefault();
 
-        try{
+    //     if(response=="exist"){
+    //         history("/UserHome",{state:{id:email}})
+    //     }
+    //         else if(response=="notexist"){
+    //         alert("El usuario no se ha registrado o los datos son erroneos")
+    //     }
+    // }
 
-            await axios.post("http://localhost:3000/signup",{
-                email,password
-            })
-            .then(res=>{
-                if(res.data=="exist"){
-                    alert("El usuario ya existe")
-                }
-                else if(res.data=="notexist"){
-                    history("/home",{state:{id:email}})
-                }
-            })
-            .catch(e=>{
-                alert("Detalles erroneos")
-                console.log(e);
-            })
-
-        }
-        catch(e){
-            console.log(e);
-
-        }
-
-    }
 
 
     return (
         <div className="login">
 
-            <h1>Signup</h1>
+            <h1>Registrarse</h1>
 
-            <form action="POST">
+            <form>
                 <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Email"  />
-                <input type="name" onChange={(e) => { setNombre(e.target.value) }} placeholder="Nombre" />
-                <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" />
-                <input type="submit" onClick={submit} />
-
+                <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password"  />
+                <Link to={"/registro/"+email+"/"+password}>Registrarme</Link>
             </form>
 
             <br />
-            <p>OR</p>
+            <p>O</p>
             <br />
 
-            <Link to="/">Login Page</Link>
+            <Link to="/login">Iniciar Sesión</Link>
 
         </div>
     )
 }
 
-export default Login
+export default Signup

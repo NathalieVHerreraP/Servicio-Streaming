@@ -19,10 +19,10 @@ function Navbar(){
                         <Link to="/Series">Series</Link>
                     </li>
                     <li>
-                        <Link to="/">Inicio de sesión</Link>
+                        <Link to="/Login">Inicio de sesión</Link>
                     </li>
                     <li>
-                        <Link to="/">Ingresar</Link>
+                        <Link to="/Signup">Registrarse</Link>
                     </li> 
                 </ul>
             </nav>
