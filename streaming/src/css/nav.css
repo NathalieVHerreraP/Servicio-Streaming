@@ -8,11 +8,15 @@
 .navegador ul li {
     text-decoration: none;
     color: black;
-    background-color: aqua;
+    background-color: #08ac90;
 
 }
 
 .navegador ul li link{
     text-decoration: none;
     color: black;
+}
+
+.navbar{
+    
 }
