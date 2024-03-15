@@ -1,22 +1,66 @@
-// import './App.css'
-import Home from "./components/Home"
-import Login from "./components/Login"
-import Signup from "./components/Signup"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from 'react';
+const express = require("express")
+const collection = require("./mongo")
+const cors = require("cors")
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cors())
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-          <Route path="/home" element={<Home/>}/>
-        </Routes>
-      </Router>
-    </div>
-  );
-}
 
-export default App;
+
+app.get("/",cors(),(req,res)=>{
+
+})
+
+
+app.post("/",async(req,res)=>{
+    const{email,password}=req.body
+
+    try{
+        const check=await collection.findOne({email:email})
+
+        if(check){
+            res.json("exist")
+        }
+        else{
+            res.json("notexist")
+        }
+
+    }
+    catch(e){
+        res.json("fail")
+    }
+
+})
+
+
+
+app.post("/signup",async(req,res)=>{
+    const{email,password}=req.body
+
+    const data={
+        email:email,
+        password:password
+    }
+
+    try{
+        const check=await collection.findOne({email:email})
+
+        if(check){
+            res.json("exist")
+        }
+        else{
+            res.json("notexist")
+            await collection.insertMany([data])
+        }
+
+    }
+    catch(e){
+        res.json("fail")
+    }
+
+})
+
+app.listen(3000,()=>{
+    console.log("Puerto conectado");
+})
