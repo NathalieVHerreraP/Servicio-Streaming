@@ -85,6 +85,18 @@ const peliculaSchema = new mongoose.Schema({
 const Pelicula = mongoose.model('Pelicula', peliculaSchema);
 module.exports = Pelicula;
 
+//usuarios
+const usuariosSchema=new mongoose.Schema({
+        nombre_usuario: String,
+        correo: String,
+        contrasena: String,
+        peliculas_vistas: Array,
+        foto: String
+})
+
+const Usuarios = mongoose.model("usuarios",usuariosSchema)
+
+module.exports = Usuarios
 
 
 //APIS
@@ -214,6 +226,50 @@ app.post('/api/serie', (req, res) => {
         console.log(error);
     }
 });
+
+//Ruta para obtener todos los USUARIOS
+app.get('/api/usuarios/', async (req, res) => {
+    try{
+        const usuarios = await Usuario.find({});
+        res.json(usuarios)
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
+app.get("/api/login/:email",async(req,res)=>{
+    const email = req.params.email;
+
+    try{
+        const usuario = await Usuarios.findOne({correo:email})
+        res.json(usuario);
+
+    }
+    catch(e){
+        console.log(e);
+    }
+
+})
+
+app.post("/api/signup/:email/:password",async(req,res)=>{
+    try{
+        const usuario = Usuario({
+            peliculas_vistas: [""],
+            listas: [""],
+            nombre_usuario: "Usuario",
+            correo: req.params.email,
+            contrasena: req.params.password,
+            foto: ""});
+        usuario.save().then((data) => res.json(data))
+
+    }
+    catch(e){
+        console.log(e);
+    }
+
+})
+
 
 
 

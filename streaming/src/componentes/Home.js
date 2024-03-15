@@ -1,5 +1,8 @@
 import React from  "react";
 import '../css/home.css';
+import Peliculas from "./Peliculas";
+import Series from "./Series";
+
 
 function Home (){
     
@@ -25,29 +28,10 @@ function Home (){
             <h2> Aquí encontrars series y peliculas de tu agrado </h2>
             <p> Entra en nuetro menú y diviertete mucho </p>
 
-            <div className="Portadas">
-                <ul>
-                    {series?.map((series) => (
-                        <>
-                        <div className="serie">
+            <Series/>
+            <Peliculas/>
 
-                        <div className="portadaSerie">
-                           <img src={series.portada} alt="portada"  />
-                         
-                        </div>
-                        
-
-                        </div>
-                        
-                        
-                         <br></br>
-                         </>
-                    ))}
-                    
-                    
-                </ul>
             </div>
-        </div>
     );
 }
 
