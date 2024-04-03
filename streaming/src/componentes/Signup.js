@@ -6,21 +6,13 @@ import '../css/style.css'; // Importa el archivo CSS
 
 function Signup() {
 
-    const history=useNavigate();
+    const navigate = useNavigate();
 
+    const [usuario,setUsuario] = useState(null);
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
 
-    // async function Submit(e){
-    //     e.preventDefault();
-
-    //     if(response=="exist"){
-    //         history("/UserHome",{state:{id:email}})
-    //     }
-    //         else if(response=="notexist"){
-    //         alert("El usuario no se ha registrado o los datos son erroneos")
-    //     }
-    // }
+    
 
 
 
@@ -32,7 +24,21 @@ function Signup() {
             <form>
                 <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Email"  />
                 <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password"  />
-                <Link to={"/registro/"+email+"/"+password}>Registrarme</Link>
+                <button
+                    onClick={
+                        ()=>{
+                            if(email != "" && password != ""){
+                                navigate(`/Registro/${email}/${password}`)
+                            }
+                                else{
+                                alert("debe de ingresar un corrreo y una contraseña")
+                            }
+                        }
+                    }
+                >
+                    Registrarme
+                </button>
+                {/* <Link to={"/registro/"+email+"/"+password}>Registrarme</Link> */}
             </form>
 
             <br />

@@ -29,7 +29,7 @@ function Home (){
             <p> Entra en nuetro menú y diviertete mucho </p>
 
             <Series/>
-            <Peliculas/>
+            {/* <Peliculas/> */}
 
             </div>
     );

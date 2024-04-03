@@ -6,23 +6,11 @@ import '../css/style.css'; // Importa el archivo CSS
 
 function Login() {
 
-    const history=useNavigate();
+    const navigate=useNavigate();
 
+    const [usuario,setUsuario] = useState(null);
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
-
-    // async function Submit(e){
-    //     e.preventDefault();
-
-    //     if(response=="exist"){
-    //         history("/UserHome",{state:{id:email}})
-    //     }
-    //         else if(response=="notexist"){
-    //         alert("El usuario no se ha registrado o los datos son erroneos")
-    //     }
-    // }
-
-
 
     return (
         <div className="login">
@@ -32,7 +20,22 @@ function Login() {
             <form>
                 <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Email"  />
                 <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password"  />
-                <Link to={"/Home/"+email}>Ingresar</Link>
+                <button
+                    onClick={
+                        ()=>{
+
+                            if(email != "" && password != ""){
+                                navigate(`/Home/${email}/${password}`)
+                            }
+                            else{
+                                alert("introduce informacion valida mamaguevo")
+                            }
+                        }
+                    }
+                >
+                    Ingresar
+                </button>
+                {/* <Link to={"/Home/"+email}>Ingresar</Link> */}
             </form>
 
             <br />

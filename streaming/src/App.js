@@ -22,12 +22,11 @@ function App() {
           <Route path="/Peliculas" element={<Peliculas/>}/>
           <Route path="/Series" element={<Series/>}/>
           <Route path="/Login" element={<Login/>}/>
-          <Route path="/Login" element={<Login/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/Registro/:email/:password" element={<Registro/>}/>
-          <Route path="/Home/:email" element={<UserHome/>}/>
+          <Route path="/Home/:email/:password" element={<UserHome/>}/>
           <Route path="/PeliculaInfo/:id" element={<PeliculaInfo/>}/>
-          <Route path="/InsertComentario/:id/:coment" element={<InsertComentario/>}/>
+          <Route path="/InsertComentario/:id/:coment/:calif" element={<InsertComentario/>}/>
           <Route path="/EliminarComentario/:id/:usuarioID" element={<EliminarComentario/>}/>
           <Route path="/" element={<Home/>}/>
 

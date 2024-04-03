@@ -21,12 +21,12 @@ function Peliculas (){
     let peliculasElementos = peliculas.map((pelicula) => {
         let sum = 0;
         for (let i = 0; i < pelicula.estrellas_usuarios.length; i++) {
-             sum = sum + pelicula.estrellas_usuarios[i].calificacion;
+             sum = sum + pelicula.comentarios[i].estrella;
             
         }
 
         let avg = 0;
-        avg = sum / pelicula.estrellas_usuarios.length;   
+        avg = sum / pelicula.comentarios.length;   
         return( 
             <div className="peliculas-info">
                 <img src={pelicula.portada}  title={`Poster de la pelicula ${pelicula.titulo}`} class="portada" />

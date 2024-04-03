@@ -1,10 +1,11 @@
 import React from "react";
-import {useParams,Link} from 'react-router-dom';
+import {useParams,Link, useNavigate} from 'react-router-dom';
 
 
 function InsertComentario(){
     let params = useParams();
     const[comentario, setComentario] = React.useState("");
+    const navigate = useNavigate();
 
     // console.log(params);
 
@@ -16,7 +17,7 @@ function InsertComentario(){
     // console.log(body); 
 
     React.useEffect(() => {
-        fetch(`http://localhost:3000/api/agregarComentario/${params.id}/PruebaFrontend/${params.coment}`).
+        fetch(`/api/agregarComentario/${params.id}/PruebaFrontend/${params.coment}/${params.calif}`).
         then((res) => res.json()).
         then((comentario) => setComentario(comentario)).
         catch(error => {
@@ -24,12 +25,13 @@ function InsertComentario(){
         })
     },[]);
 
-    return (
-        <div>
-            <p>{comentario.respuesta}</p>
-            <Link to={"/PeliculaInfo/" + params.id}><p>Regresar</p></Link>
-        </div>
-    );
+    if(comentario.respuesta){
+        return (
+            navigate(`/Peliculainfo/${params.id}`)
+        );
+    }
+
+    
 
 }
 

@@ -46,17 +46,31 @@
     justify-content: center;
 }
 
+.range{
+    cursor: pointer;
+    accent-color: #040c43;
+}
+
+.textbox{
+    height: 60px;
+    font-family:"Arial";  
+    font-size: 15px;
+    resize: vertical;
+}
+
 .boton{
     outline: none;
     text-decoration: none;
+    cursor: pointer;
+    size: 20px;
 }
 
 .publicar{
-    color: #d2d7e5;
+    background-color: #d2d7e5;
  }
 
  .publicar:hover{
-    color: #37657d;
+    background-color: #37657d;
  }
 
 .borrar{

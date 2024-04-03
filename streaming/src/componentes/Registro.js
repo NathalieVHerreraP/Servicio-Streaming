@@ -6,7 +6,7 @@ function Registro (){
     let params = useParams();
     const location=useLocation();
     const [response,setResponse]= React.useState('');
-    let bienvenida = (<></>);
+    const navigate = useNavigate();
 
     console.log(params);
 
@@ -14,7 +14,7 @@ function Registro (){
         const requestOptions = {
             method: 'POST',
         };
-        fetch(`http://localhost:3000/api/signup/:${params.email}/:${params.password}`,requestOptions)
+        fetch(`/api/signup/:${params.email}/:${params.password}`,requestOptions)
         .then((res) => res.json())
         .then((response) => setResponse(response))
         .catch(error => {
@@ -24,29 +24,16 @@ function Registro (){
 
     console.log(response);
 
-    if(response){
-        bienvenida = (
-            <div>
-                <h1>Haz sido Registrado con exito!</h1>  
-                <Link to="/login">iniciar Sesión</Link>
-
-            </div>
+    if(response.respuesta){
+        return(
+            navigate(`/Login`, alert("Se registró con éxito"))
         );
     }else {
-        bienvenida = (
-            <div>
-                <h1>Registro falló!</h1>
-                <Link to="/Signup">intentar de nuevo</Link>
-
-            </div>
+        return(
+            navigate(`/Signup`, alert("Registro falló, intente de nuevo"))
         );
     }
 
-    return (
-        <div className="homepage">
-            {bienvenida}
-        </div>
-    )
 }
 
 export default Registro;

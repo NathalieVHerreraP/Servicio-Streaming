@@ -1,17 +1,15 @@
 import React from "react"
-import {useLocation, useNavigate} from 'react-router-dom';
 import {Link, useParams, } from "react-router-dom";
 
 function UserHome (){
     let params = useParams();
-    const location=useLocation();
-    const [response,setResponse]= React.useState('');
+    const [response,setResponse]= React.useState(null);
     let bienvenida = (<></>);
 
     console.log(params);
 
     React.useEffect(() => {
-        fetch(`http://localhost:3000/api/login/${params.email}`)
+        fetch(`/api/login/${params.email}/${params.password}`)
         .then((res) => res.json())
         .then((response) => setResponse(response))
         .catch(error => {
@@ -19,10 +17,15 @@ function UserHome (){
           });
     }, []);
 
+    console.log(response);
+
+    sessionStorage.setItem("usuario", response.nombre_usuario);
+    
+
     if(response){
         bienvenida = (
             <div>
-                <h1>bienvenido {response.nombre_usuario}</h1>  
+                <h1>bienvenido {response.nombre_usuario}</h1> 
             </div>
         );
     }else {

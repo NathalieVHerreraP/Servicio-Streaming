@@ -75,9 +75,9 @@ const peliculaSchema = new mongoose.Schema({
     comentarios: [{
         usuario: String,
         contenido:String ,
-        fecha: Date
+        fecha: Date,
+        estrella: Number
     }],
-    estrellas_usuarios: Array,
     portada: String
 
 })
@@ -91,12 +91,23 @@ const usuariosSchema=new mongoose.Schema({
         correo: String,
         contrasena: String,
         peliculas_vistas: Array,
-        foto: String
+        foto: String,
+        isLogged: Boolean
 })
 
 const Usuarios = mongoose.model("usuarios",usuariosSchema)
 
 module.exports = Usuarios
+
+const notifSchema = new mongoose.Schema({
+    titulo: String,
+    usuario: String,
+    fecha: String
+})
+
+const NotifComents = mongoose.model("notificaciones", notifSchema)
+
+module.exports = NotifComents
 
 
 //APIS
@@ -137,6 +148,31 @@ app.get('/api/peliculas/', async (req, res) => {
     }
 })
 
+//Ruta para obtener las noficiaciones del dia
+app.get('/api/notificaciones/', async (req,res) =>{
+        const fecha = new Date();
+        const dia = fecha.getDay();
+        const mes = fecha.getMonth()+1;
+        const año = fecha.getFullYear();
+        const fechaCompleta = año+"-"+mes+"-"+dia; 
+
+        try{
+        const notifs = await NotifComents.find({
+            "$expr": {
+              "$and": [
+                { $eq: [{ $year: "$fecha" }, { $year: new Date(fechaCompleta) }]},
+                { $eq: [{ $month: "$fecha" }, { $month: new Date(fechaCompleta) }]},
+                { $eq: [{ $dayOfMonth: "$fecha" }, { $dayOfMonth: new Date(fechaCompleta) }]}
+              ]
+            }
+          })
+        res.json(notifs);
+    }
+    catch(error){
+        console.log(error);
+    }
+})
+
 //Ruta obtener una pelicula por id
 app.get("/api/pelicula/:id", async (req, res) => {
     let idPelicula = req.params.id;
@@ -150,23 +186,32 @@ app.get("/api/pelicula/:id", async (req, res) => {
 })
 
 //Ruta insertar un comentario
-app.get("/api/agregarComentario/:id/:usuario/:coment", async (req, res) => {
+app.get("/api/agregarComentario/:id/:usuario/:coment/:calif", async (req, res) => {
     let idPelicula = req.params.id;
     let coment = {
         usuario: req.params.usuario,
-        contenido: req.params.coment
+        contenido: req.params.coment,
+        calif: req.params.calif
     };
-    console.log("ID: "+ idPelicula +"Comentario: "+ coment);
+    console.log("ID: "+ idPelicula +"Comentario: "+ coment.calif/2);
     try{
         let doc = await Pelicula.findByIdAndUpdate( idPelicula,
-            { $push: {comentarios: {
-                usuario: coment.usuario,  
-                contenido: coment.contenido, 
-                fecha: new Date()
-            }}}
+            { 
+                $push: 
+                {
+                    "comentarios": 
+                        {
+                            usuario: coment.usuario,  
+                            contenido: coment.contenido, 
+                            fecha: new Date(),
+                            estrella: coment.calif
+                        }
+                }
+            }
         ) 
+
         console.log(doc); 
-        res.json({respuesta:"se añadió el comentario"});
+        res.json({respuesta: true});
     }catch(error){
         console.log(error);
     };
@@ -238,11 +283,13 @@ app.get('/api/usuarios/', async (req, res) => {
     }
 })
 
-app.get("/api/login/:email",async(req,res)=>{
+//obtener usuario
+app.get("/api/login/:email/:contrasena",async(req,res)=>{
     const email = req.params.email;
+    const contra = req.params.contrasena;
 
     try{
-        const usuario = await Usuarios.findOne({correo:email})
+        const usuario = await Usuarios.findOneAndUpdate({correo: email, contrasena: contra},{isLogged: true})
         res.json(usuario);
 
     }
@@ -261,7 +308,7 @@ app.post("/api/signup/:email/:password",async(req,res)=>{
             correo: req.params.email,
             contrasena: req.params.password,
             foto: ""});
-        usuario.save().then((data) => res.json(data))
+        usuario.save().then(res.json({respuesta: true}))
 
     }
     catch(e){
